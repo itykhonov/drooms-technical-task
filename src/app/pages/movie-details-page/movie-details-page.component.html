@@ -1,0 +1,32 @@
+<a class="btn-back" routerLink="/">&larr; Go to Home page</a>
+<h1>Movie details page</h1>
+<div *ngIf="!(isFilmsLoading$ | async)">
+  <dl *ngIf="film$ | async as film">
+    <dt>Title</dt>
+    <dd>
+      <h2>{{film.title}}</h2>
+    </dd>
+    <dt>Producer</dt>
+    <dd>{{film.producer}}</dd>
+    <dt>Director</dt>
+    <dd>{{film.director}}</dd>
+    <dt>Release date</dt>
+    <dd>{{film.release_date}}</dd>
+    <dt>Description</dt>
+    <dd>{{film.opening_crawl}}</dd>
+    <dt>Characters</dt>
+    <dd *ngIf="!(isCharacterLoading$ | async)">
+      <ul *ngIf="(characters$ | async)?.length">
+        <li *ngFor="let character of (characters$ | async)">
+          <a [routerLink]="['../../characters', character?.id]">{{character?.name}}</a>
+        </li>
+      </ul>
+    </dd>
+    <dd *ngIf="(isCharacterLoading$ | async)">
+      <img src="https://i.pinimg.com/originals/ae/6c/9b/ae6c9b322a3761a2c2bce9de0fd80f97.gif" alt="loader">
+    </dd>
+  </dl>
+</div>
+<div *ngIf="(isFilmsLoading$ | async)">
+  <img src="https://i.pinimg.com/originals/01/3d/23/013d23dffe686b0387fb5fe3d6a574ce.gif" alt="loader">
+</div>

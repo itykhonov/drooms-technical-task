@@ -1,0 +1,38 @@
+<a class="btn-back" routerLink="/">&larr; Go to Home page</a>
+<h1>Character details page</h1>
+<div *ngIf="!(isCharacterLoading$ | async)">
+  <dl *ngIf="character$ | async as character">
+    <dt>Name</dt>
+    <dd>
+      <h2>{{character.name}}</h2>
+    </dd>
+    <dt>Birth year</dt>
+    <dd>{{character.birth_year}}</dd>
+    <dt>Eye color</dt>
+    <dd>{{character.eye_color}}</dd>
+    <dt>Gender</dt>
+    <dd>{{character.gender}}</dd>
+    <dt>Hair color</dt>
+    <dd>{{character.hair_color}}</dd>
+    <dt>Height</dt>
+    <dd>{{character.height}}</dd>
+    <dt>Mass</dt>
+    <dd>{{character.mass}}</dd>
+    <dt>Skin color</dt>
+    <dd>{{character.skin_color}}</dd>
+    <dt>Films</dt>
+    <dd *ngIf="!(isFilmsLoading$ | async)">
+      <ul *ngIf="(films$ | async)?.length">
+        <li *ngFor="let film of (films$ | async)">
+          <a [routerLink]="['../../films', film?.id]">{{film?.title}}</a>
+        </li>
+      </ul>
+    </dd>
+    <dd *ngIf="(isFilmsLoading$ | async)">
+      <img src="https://i.pinimg.com/originals/01/3d/23/013d23dffe686b0387fb5fe3d6a574ce.gif" alt="loader">
+    </dd>
+  </dl>
+</div>
+<div *ngIf="(isCharacterLoading$ | async)">
+  <img src="https://i.pinimg.com/originals/ae/6c/9b/ae6c9b322a3761a2c2bce9de0fd80f97.gif" alt="loader">
+</div>

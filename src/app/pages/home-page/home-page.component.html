@@ -1,0 +1,11 @@
+<h1>List of “Star Wars” movies</h1>
+<div *ngIf="!(isFilmsLoading$ | async)">
+  <ul *ngIf="films$ | async as films">
+    <li *ngFor="let film of films">
+      <a [routerLink]="['../films', film.id]">{{film.title}}</a>
+    </li>
+  </ul>
+</div>
+<div *ngIf="(isFilmsLoading$ | async)">
+  <img src="https://i.pinimg.com/originals/01/3d/23/013d23dffe686b0387fb5fe3d6a574ce.gif" alt="loader">
+</div>
